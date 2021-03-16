@@ -14,5 +14,6 @@
 #include <vector>
 #include <functional>
 #include <memory>
+#include <map>
 
 #endif /* !REQUIRED_HPP_ */
