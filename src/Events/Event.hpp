@@ -2,23 +2,28 @@
 ** CloneGame Virgile AGNEL
 */
 
+#pragma once
+
 #ifndef EVENT_HPP_
 #define EVENT_HPP_
 
 #include "required.hpp"
-#include "IEventType.hpp"
+#include "../SDL2/window/Window.hpp"
 
 namespace Clone {
     class Event {
         public:
-            Event();
+            Event(Window &);
             void handleEvent();
             ~Event();
 
         protected:
         private:
+            void handleQuit() const noexcept;
+
             SDL_Event _sdlEvent;
-            std::map<SDL_EventType, std::unique_ptr<IEventType>> _eventList;
+            Window &_current;
+            std::map<SDL_EventType, std::function<void(const Event &)>> _eventList;
     };
 }
 

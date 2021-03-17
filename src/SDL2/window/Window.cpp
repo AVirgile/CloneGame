@@ -4,6 +4,7 @@
 
 #include "Window.hpp"
 #include "../../Errors/SDL2/ErrorSDL.hpp"
+#include "../../Events/Event.hpp"
 
 Clone::Window::Window(const size_t &x, const size_t &y, const size_t &flags)
 {
@@ -12,6 +13,23 @@ Clone::Window::Window(const size_t &x, const size_t &y, const size_t &flags)
     this->_win_lenght = x;
     this->_win = nullptr;
     this->_isRunning = false;
+    this->_eventHandler = std::make_unique<Event>(*this);
+}
+
+Clone::Window::Window(const Window &cpy)
+{
+    this->_isRunning = cpy._isRunning;
+    this->_context = cpy._context;
+    this->_win = cpy._win;
+    this->_win_flags = cpy._win_flags;
+    this->_win_height = cpy._win_height;
+    this->_win_lenght = cpy._win_lenght;
+    this->_eventHandler = cpy._eventHandler;
+}
+
+void Clone::Window::setIsRunning(const bool &val)
+{
+    this->_isRunning = val;
 }
 
 void Clone::Window::createWindow(const std::string &name)
@@ -41,7 +59,7 @@ void Clone::Window::mainLoop()
 {
     this->_isRunning = true;
     while (this->_isRunning == true) {
-        // event in there
+        this->_eventHandler->handleEvent();
         glClear(GL_COLOR_BUFFER_BIT);
         SDL_GL_SwapWindow(this->_win);
     }

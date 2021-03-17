@@ -9,10 +9,14 @@
 
 #include "required.hpp"
 
+
 namespace Clone {
+    class Event;
     class Window {
         public:
             Window(const size_t &, const size_t &, const size_t &);
+            Window(const Window &);
+            void setIsRunning(const bool &);
             void createWindow(const std::string &);
             void mainLoop();
             ~Window();
@@ -25,6 +29,7 @@ namespace Clone {
             size_t _win_height;
             size_t _win_lenght;
             SDL_GLContext _context;
+            std::shared_ptr<Event> _eventHandler;
     };
 }
 
