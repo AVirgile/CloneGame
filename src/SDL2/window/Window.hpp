@@ -16,6 +16,7 @@ namespace Clone {
         public:
             Window(const size_t &, const size_t &, const size_t &);
             Window(const Window &);
+            Window &operator=(const Window &);
             void setIsRunning(const bool &);
             void createWindow(const std::string &);
             void mainLoop();

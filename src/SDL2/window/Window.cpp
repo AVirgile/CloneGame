@@ -16,6 +16,18 @@ Clone::Window::Window(const size_t &x, const size_t &y, const size_t &flags)
     this->_eventHandler = std::make_unique<Event>(*this);
 }
 
+Clone::Window &Clone::Window::operator=(const Window &cpy)
+{
+    this->_isRunning = cpy._isRunning;
+    this->_context = cpy._context;
+    this->_win = cpy._win;
+    this->_win_flags = cpy._win_flags;
+    this->_win_height = cpy._win_height;
+    this->_win_lenght = cpy._win_lenght;
+    this->_eventHandler = cpy._eventHandler;
+    return (*this);
+}
+
 Clone::Window::Window(const Window &cpy)
 {
     this->_isRunning = cpy._isRunning;
