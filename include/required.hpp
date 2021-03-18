@@ -15,5 +15,7 @@
 #include <functional>
 #include <memory>
 #include <map>
+#include <fstream>
+#include <string>
 
 #endif /* !REQUIRED_HPP_ */

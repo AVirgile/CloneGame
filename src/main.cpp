@@ -7,6 +7,7 @@
 
 int main(void)
 {
+    const char *msg = nullptr;
     std::unique_ptr<Clone::Window> core = std::make_unique<Clone::Window>(1200, 800, SDL_WINDOW_OPENGL);
 
     try {
@@ -14,7 +15,9 @@ int main(void)
         core->mainLoop();
     }
     catch(const std::exception& e) {
-        std::cerr << e.what() << std::endl;
+        msg = e.what();
+        std::cerr << msg << std::endl;
+        delete msg;
         return (84);
     }
     return (0);

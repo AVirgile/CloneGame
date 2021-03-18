@@ -8,7 +8,7 @@
 #define WINDOW_HPP_
 
 #include "required.hpp"
-
+#include "../buffers/Buffer.hpp"
 
 namespace Clone {
     class Event;
