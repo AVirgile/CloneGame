@@ -7,6 +7,7 @@
 
 SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &flags, const std::string &name)
 {
+    this->__timeManager = std::make_shared<Clock>();
     this->__width = width;
     this->__height = height;
     this->__flags = flags;
@@ -38,6 +39,12 @@ void SDL2::Window::runWindow()
 void SDL2::Window::__gameLoop()
 {
     while (this->__running) {
+        // if (this->__timeManager->calculTime(500)) {
+        //     std::cout << "half a second" << std::endl;
+        // }
+        // if (this->__timeManager->calculTime(1000)) {
+        //     std::cout << "one second" << std::endl;
+        // }
         glClear(GL_COLOR_BUFFER_BIT);
         SDL_GL_SwapWindow(this->__window);
     }

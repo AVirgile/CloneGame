@@ -5,6 +5,7 @@
 #pragma once
 
 #include "required.hpp"
+#include "../Clock/Clock.hpp"
 
 namespace SDL2 {
     class Window {
@@ -42,5 +43,6 @@ namespace SDL2 {
             SDL_Window *__window;
             SDL_GLContext __context;
             bool __running;
+            std::shared_ptr<Clock> __timeManager;
     };
 }

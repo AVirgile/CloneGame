@@ -18,4 +18,6 @@
 #include <fstream>
 #include <string>
 
+#define ONE_SECOND 1000
+
 #endif /* !REQUIRED_HPP_ */
