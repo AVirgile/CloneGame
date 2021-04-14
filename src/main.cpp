@@ -3,21 +3,16 @@
 */
 
 #include "required.hpp"
-#include "SDL2/window/Window.hpp"
+#include "SDL2/Window/Window.hpp"
 
-int main(void)
-{
-    const char *msg = nullptr;
-    std::unique_ptr<Clone::Window> core = std::make_unique<Clone::Window>(1200, 800, SDL_WINDOW_OPENGL);
-
+int main(int const argc, char const *argv[])
+{ 
+    (void)argc;
+    (void)argv;
     try {
-        core->createWindow("Clone");
-        core->mainLoop();
-    }
-    catch(const std::exception& e) {
-        msg = e.what();
-        std::cerr << msg << std::endl;
-        delete msg;
+        SDL2::Window(1600, 900, SDL_WINDOW_OPENGL, "clone").runWindow();
+    } catch (const std::exception &ex) {
+        std::cerr << ex.what() << std::endl;
         return (84);
     }
     return (0);
