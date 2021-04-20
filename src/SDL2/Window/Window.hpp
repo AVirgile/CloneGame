@@ -6,6 +6,8 @@
 
 #include "required.hpp"
 #include "../Clock/Clock.hpp"
+#include "../Events/Events.hpp"
+#include "../../Game/GameData/GameData.hpp"
 
 namespace SDL2 {
     class Window {
@@ -32,7 +34,6 @@ namespace SDL2 {
                 return (this->__name);
             }
         protected:
-        
         private:
             void __gameLoop();
 
@@ -44,5 +45,7 @@ namespace SDL2 {
             SDL_GLContext __context;
             bool __running;
             std::shared_ptr<Clock> __timeManager;
+            Events __eventsHandler;
+            std::unique_ptr<Game::GameData> __gameInfo;
     };
 }
