@@ -20,4 +20,9 @@
 
 #define ONE_SECOND 1000
 
+enum GameObjectInfo {
+    PLAYER,
+    BLOCK,
+};
+
 #endif /* !REQUIRED_HPP_ */

@@ -52,6 +52,8 @@ void SDL2::Window::__gameLoop()
         //     std::cout << "one second" << std::endl;
         // }
         this->__eventsHandler.processEvent(this->__running, *this->__gameInfo);
+        this->__gameInfo->updateGame();
+        this->__gameInfo->render();
         glClear(GL_COLOR_BUFFER_BIT);
         SDL_GL_SwapWindow(this->__window);
     }
