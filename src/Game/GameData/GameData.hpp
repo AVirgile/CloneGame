@@ -5,7 +5,7 @@
 #pragma once
 
 #include "required.hpp"
-#include "../GameObject/IGameObject.hpp"
+#include "Builder/ObjectBuilder.hpp"
 
 namespace Game {
     class GameData {
@@ -26,6 +26,7 @@ namespace Game {
 
         protected:
         private:
+            ObjectBuilder __objectsBuilder;
             std::vector<std::unique_ptr<IGameObject>> __gameObjs;
     };
 }

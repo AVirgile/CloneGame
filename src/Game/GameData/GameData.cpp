@@ -6,7 +6,7 @@
 
 Game::GameData::GameData()
 {
-    // create initial gameData from there
+    this->__gameObjs.emplace_back(this->__objectsBuilder.createObject("test", BLOCK, "./src/Game/Shaders/src/DefaultBlock/block.vert", "./src/Game/Shaders/src/DefaultBlock/block.frag"));
 }
 
 void Game::GameData::updateGame()
@@ -16,7 +16,9 @@ void Game::GameData::updateGame()
 
 void Game::GameData::render()
 {
-    // render all the gameObject that are visible by the player
+    for (auto const &val : this->__gameObjs) {
+        val->renderObj();
+    }
 }
 
 Game::GameData::~GameData()
