@@ -3,9 +3,11 @@
 */
 
 #include "Blocks.hpp"
+#include "../../Errors/ErrorsGameEngine/ErrorsGameEngine.hpp"
 
 Game::Blocks::Blocks(const std::string &name, const GameObjectInfo &type, const std::string &vPath, const std::string &fPath) : GameObject(name, type)
 {
+    ::GLint size = 0;
     std::cout << "constructing a block..." << std::endl;
     // first trying to draw a triangle
     const float positions[] = { // vertex here is really symple it is only position
@@ -18,6 +20,12 @@ Game::Blocks::Blocks(const std::string &name, const GameObjectInfo &type, const 
     ::glGenBuffers(1, &this->__bufferId);
     ::glBindBuffer(GL_ARRAY_BUFFER, this->__bufferId);
     ::glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), &positions, GL_STATIC_DRAW);
+    ::glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+    if (6 * sizeof(float) != size) {
+        ::glDeleteBuffers(1, &this->__bufferId);
+        throw Errors::ErrorsGameEngine("error creating buffer -> " + std::to_string(::glGetError()));
+        
+    }
     ::glEnableVertexAttribArray(0);
     ::glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
     // multiple call of vertexAttrib and enableVertex if vertex contains multiple info
@@ -36,4 +44,5 @@ void Game::Blocks::renderObj()
 
 Game::Blocks::~Blocks()
 {
+    ::glDeleteBuffers(1, &this->__bufferId);
 }

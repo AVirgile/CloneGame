@@ -28,7 +28,7 @@ SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
     this->__context = SDL_GL_CreateContext(this->__window);
     this->__running = false;
-    glClearColor(1.f, 0.f, 1.f, 0.f);
+    glClearColor(0.f, 0.f, 0.f, 0.f);
     glViewport(0, 0, this->__width, this->__height);
     this->__gameInfo = std::make_unique<Game::GameData>();
 }
@@ -52,10 +52,10 @@ void SDL2::Window::__gameLoop()
         // if (this->__timeManager->calculTime(1000)) {
         //     std::cout << "one second" << std::endl;
         // }
+        glClear(GL_COLOR_BUFFER_BIT);
         this->__eventsHandler.processEvent(this->__running, *this->__gameInfo);
         this->__gameInfo->updateGame();
         this->__gameInfo->render();
-        glClear(GL_COLOR_BUFFER_BIT);
         SDL_GL_SwapWindow(this->__window);
     }
 }
