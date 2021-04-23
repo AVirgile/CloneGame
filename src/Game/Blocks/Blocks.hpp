@@ -19,5 +19,6 @@ namespace Game {
         protected:
         private:
             std::unique_ptr<Shaders> __shader;
+            ::GLuint __ibo;
     };
 }
