@@ -6,9 +6,9 @@
 #include "../../Errors/ErrorsSDL2/ErrorsSDL2.hpp"
 #include "../../Errors/ErrorsGameEngine/ErrorsGameEngine.hpp"
 
-SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &flags, const std::string &name)
+SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &flags, const std::string &name, const std::chrono::_V2::steady_clock::time_point &start)
 {
-    this->__timeManager = std::make_shared<Clock>();
+    this->__timeManager = std::make_shared<Clock>(start);
     this->__width = width;
     this->__height = height;
     this->__flags = flags;

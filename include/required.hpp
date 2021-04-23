@@ -10,6 +10,7 @@
 #define GL_GLEXT_PROTOTYPES
 
 #include <iostream>
+#include <chrono>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 #include <GL/gl.h>
@@ -20,7 +21,9 @@
 #include <map>
 #include <fstream>
 #include <string>
-#include<sstream>
+#include <sstream>
+#include "glm/glm/glm.hpp"
+#include "glm/glm/gtx/transform.hpp"
 
 #define ONE_SECOND 1000
 

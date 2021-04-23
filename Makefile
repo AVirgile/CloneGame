@@ -10,7 +10,7 @@ SRCS	= $(call rwildcard,src,*.cpp)
 
 OBJS	= $(SRCS:.cpp=.o)
 
-CPPFLAGS = -I ./include/ -g -Wall -Werror -Wextra -Wuninitialized
+CPPFLAGS = -I ./include/ -I ./libs/ -g -Wall -Werror -Wextra -Wuninitialized
 LINKERS = -lSDL2 -lGL
 
 all: $(NAME)
