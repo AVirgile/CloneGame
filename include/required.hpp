@@ -4,9 +4,6 @@
 
 #pragma once
 
-#ifndef REQUIRED_HPP_
-#define REQUIRED_HPP_
-
 #define GL_GLEXT_PROTOTYPES
 
 #include <iostream>
@@ -32,4 +29,31 @@ enum GameObjectInfo {
     BLOCK,
 };
 
-#endif /* !REQUIRED_HPP_ */
+// static tab linking key in csv to sdl key
+static const std::pair<std::string, char> strToSDL[] = {
+    std::make_pair("z", SDLK_z),
+    std::make_pair("s", SDLK_s),
+    std::make_pair("q", SDLK_q),
+    std::make_pair("d", SDLK_d),
+    std::make_pair("esc", SDLK_ESCAPE),
+    // MORE...
+};
+
+enum ActionsOnEvents {
+    FORWARD,
+    BACKWARD,
+    LEFT,
+    RIGHT,
+    QUIT,
+    // MORE...
+};
+
+// static tab linking action in csv to events actions
+static const std::pair<std::string, ActionsOnEvents> strToActions[] = {
+    std::make_pair("forward", FORWARD),
+    std::make_pair("backward", BACKWARD),
+    std::make_pair("left", LEFT),
+    std::make_pair("right", RIGHT),
+    std::make_pair("quit", QUIT),
+    // MORE...
+};

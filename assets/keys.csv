@@ -1,0 +1,5 @@
+action   , key
+forward  , z
+backward , s
+left     , q
+right    , d
