@@ -4,7 +4,7 @@
 
 #include "ErrorsUtils.hpp"
 
-Errors::ErrorsUtils::ErrorsUtils(const std::string &msg) throw() : __msg(msg)
+Errors::ErrorsUtils::ErrorsUtils(const std::string &msg) throw() : __msg("Error in tools classes: " + msg)
 {
 }
 
