@@ -29,6 +29,8 @@ enum GameObjectInfo {
     BLOCK,
 };
 
+#define NB_OF_ACTIONS 5 // modify every time new key is added
+
 // static tab linking key in csv to sdl key
 static const std::pair<std::string, char> strToSDL[] = {
     std::make_pair("z", SDLK_z),

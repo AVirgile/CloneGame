@@ -48,7 +48,7 @@ Game::Blocks::Blocks(const std::string &name, const GameObjectInfo &type, const 
 
 void Game::Blocks::renderObj()
 {
-    std::cout << "rendering -> " << this->__bufferId << std::endl;
+    //std::cout << "rendering -> " << this->__bufferId << std::endl;
     ::glBindBuffer(GL_ARRAY_BUFFER, this->__ibo);
     ::glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
     ::glBindBuffer(GL_ARRAY_BUFFER, 0);

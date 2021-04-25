@@ -17,7 +17,7 @@ void SDL2::Events::processEvent(bool &running, Game::GameData &data)
         } else {
             for (auto const &val : this->__typeMap) {
                 if (this->__inputs.type == val.first) {
-                    val.second->handleType(data);
+                    val.second->handleType(data, this->__inputs);
                 }
             }
         }

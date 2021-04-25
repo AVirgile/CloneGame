@@ -4,7 +4,7 @@
 
 #include "GameData.hpp"
 
-Game::GameData::GameData()
+Game::GameData::GameData() : __keyRetriever("./assets/keys.csv")
 {
     this->__gameObjs.emplace_back(this->__objectsBuilder.createObject("test", BLOCK, "./src/Game/Shaders/src/DefaultBlock/block.vert", "./src/Game/Shaders/src/DefaultBlock/block.frag"));
 }
