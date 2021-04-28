@@ -15,7 +15,7 @@ namespace Game {
             Blocks(const std::string &name, const GameObjectInfo &type, const std::string &vPath, const std::string &fPath);
             ~Blocks();
 
-            void renderObj();
+            void renderObj(const Camera &cam);
         protected:
         private:
             std::unique_ptr<Shaders> __shader;

@@ -14,12 +14,12 @@ namespace SDL2 {
             void handleType(Game::GameData &data, const SDL_Event &input);
         protected:
         private:
-            void __handleForward();
-            void __handleBackward();
-            void __handleLeft();
-            void __handleRight();
-            void __handleQuit();
+            void __handleForward(Game::GameData &data);
+            void __handleBackward(Game::GameData &data);
+            void __handleLeft(Game::GameData &data);
+            void __handleRight(Game::GameData &data);
+            void __handleQuit(Game::GameData &data);
 
-            std::map<ActionsOnEvents, std::function<void (KeyDown &)>> __callbackMap;
+            std::map<ActionsOnEvents, std::function<void (KeyDown &, Game::GameData &data)>> __callbackMap;
     };
 }

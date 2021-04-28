@@ -5,6 +5,8 @@
 #include "Window.hpp"
 #include "../../Errors/ErrorsSDL2/ErrorsSDL2.hpp"
 #include "../../Errors/ErrorsGameEngine/ErrorsGameEngine.hpp"
+#include "glm/glm/fwd.hpp"
+#include "../../Errors/StopOccured/StopOccured.hpp"
 
 SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &flags, const std::string &name, const std::chrono::_V2::steady_clock::time_point &start)
 {
@@ -30,7 +32,7 @@ SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &
     this->__running = false;
     glClearColor(0.f, 0.f, 0.f, 0.f);
     glViewport(0, 0, this->__width, this->__height);
-    this->__gameInfo = std::make_unique<Game::GameData>();
+    this->__gameInfo = std::make_unique<Game::GameData>(glm::vec3(0, 0, -3), 70.0f, static_cast<float>(this->__width / this->__height), 0.01f, 1000.0f, 0.05f, this->__timeManager);
 }
 
 void SDL2::Window::runWindow()
@@ -53,9 +55,13 @@ void SDL2::Window::__gameLoop()
         //     std::cout << "one second" << std::endl;
         // }
         glClear(GL_COLOR_BUFFER_BIT);
-        this->__eventsHandler.processEvent(this->__running, *this->__gameInfo);
-        this->__gameInfo->updateGame();
-        this->__gameInfo->render();
+        try {
+            this->__eventsHandler.processEvent(this->__running, *this->__gameInfo);
+            this->__gameInfo->updateGame();
+            this->__gameInfo->render(this->__gameInfo->getCam());
+        } catch (const Errors::StopOccured &ex) {
+            this->__running = false;
+        }
         SDL_GL_SwapWindow(this->__window);
     }
 }

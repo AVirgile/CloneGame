@@ -46,9 +46,10 @@ Game::Blocks::Blocks(const std::string &name, const GameObjectInfo &type, const 
     ::glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void Game::Blocks::renderObj()
+void Game::Blocks::renderObj(const Camera &cam)
 {
     //std::cout << "rendering -> " << this->__bufferId << std::endl;
+    (void)cam;
     ::glBindBuffer(GL_ARRAY_BUFFER, this->__ibo);
     ::glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
     ::glBindBuffer(GL_ARRAY_BUFFER, 0);
