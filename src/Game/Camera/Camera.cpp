@@ -6,9 +6,16 @@
 */
 
 #include "Camera.hpp"
+#include "glm/glm/fwd.hpp"
+#include "glm/glm/geometric.hpp"
+#include "glm/glm/trigonometric.hpp"
 
 Game::Camera::Camera(const glm::vec3 &pos, const float &fov, const float &aspect, const float &near, const float &far, const float &speed)
 {
+    this->__pitch = 0.0f;
+    this->__yaw = 0.0f;
+    this->__mouseSensitivity = 0.1f; // change this to variable number;
+    this->__firstMouseMotion = true;
     this->__fov = fov;
     this->__aspect = aspect;
     this->__near = near;
@@ -46,6 +53,30 @@ void Game::Camera::processInput(const CameraAction &action)
     if (action == CameraAction::DOWN) {
         this->__cameraPos -= this->__camSpeed * this->__cameraUp;
     }
+}
+
+void Game::Camera::processMouveMove(const glm::vec2 &mousePos)
+{
+    float xOffset = mousePos.x;
+    float yOffset = mousePos.y;
+    glm::vec3 direction;
+
+    std::cout << xOffset << " " << yOffset << std::endl;
+    this->__pitch += -yOffset * this->__mouseSensitivity;
+    this->__yaw += xOffset * this->__mouseSensitivity;
+    if (this->__pitch > MAX_PITCH_ANGLE) {
+        std::cout << "max reached" << std::endl;
+        this->__pitch = MAX_PITCH_ANGLE;
+    }
+    if (this->__pitch < MIN_PITCH_ANGLE) {
+        std::cout << "min reached" << std::endl;
+        this->__pitch = MIN_PITCH_ANGLE;
+    }
+    std::cout << this->__pitch << std::endl;
+    direction.x = cos(glm::radians(this->__yaw)) * cos(glm::radians(this->__pitch));
+    direction.y = sin(glm::radians(this->__pitch));
+    direction.z = sin(glm::radians(this->__yaw)) * cos(glm::radians(this->__pitch));
+    this->__cameraForward = glm::normalize(direction);
 }
 
 Game::Camera::~Camera()

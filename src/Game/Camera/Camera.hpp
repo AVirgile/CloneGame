@@ -4,7 +4,11 @@
 
 #pragma once
 
+#include "glm/glm/fwd.hpp"
 #include "required.hpp"
+
+#define MAX_PITCH_ANGLE 89.0f
+#define MIN_PITCH_ANGLE -89.0f
 
 namespace Game {
     class Camera {
@@ -62,11 +66,19 @@ namespace Game {
             {
                 return (this->__near);
             }
+            inline glm::vec2 &getLastMousePos()
+            {
+                return (this->__lastMousePos);
+            }
+            inline float &getMouseSensitivity()
+            {
+                return (this->__mouseSensitivity);
+            }
 
             glm::mat4 getViewProjection() const;
 
             void processInput(const CameraAction &action);
-            // handle mouseMovement;
+            void processMouveMove(const glm::vec2 &mousePos);
 
         protected:
         private:
@@ -74,6 +86,7 @@ namespace Game {
             glm::vec3 __cameraPos;
             glm::vec3 __cameraForward;
             glm::vec3 __cameraUp;
+            glm::vec2 __lastMousePos;    
 
             float __fov;
             float __aspect;
@@ -81,5 +94,9 @@ namespace Game {
             float __far;
             float __saveSpeed;
             float __camSpeed;
+            float __mouseSensitivity;
+            float __pitch;
+            float __yaw;
+            bool __firstMouseMotion;
     };
 }
