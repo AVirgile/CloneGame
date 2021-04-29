@@ -4,6 +4,7 @@
 
 #include "Shaders.hpp"
 #include "../../Errors/ErrorsGameEngine/ErrorsGameEngine.hpp"
+#include <SDL2/SDL_opengl_glext.h>
 
 Game::Shaders::Shaders(const std::string &vertexPath, const std::string &fragmentPath)
 {
@@ -51,6 +52,13 @@ Game::Shaders::Shaders(const std::string &vertexPath, const std::string &fragmen
         throw Errors::ErrorsGameEngine("Error compiling shader -> " + std::string(message));
     }
     return (id);
+}
+
+void Game::Shaders::updateShader(const Camera &cam, const Transform &trs)
+{
+    int mat4Location = ::glGetUniformLocation(this->__programID, "u_MVP");
+ 
+    ::glUniformMatrix4fv(mat4Location, 1, GL_FALSE, &trs.getMVP(cam)[0][0]);
 }
 
 std::string Game::Shaders::__openFile(const std::string &path) const

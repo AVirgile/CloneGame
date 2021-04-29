@@ -22,6 +22,7 @@ void SDL2::KeyDown::__handleForward(Game::GameData &data)
 {
     float &camSpeed = data.getCam().getCamSpeed();
 
+    std::cout << data.getClock()->getDeltaTime() << std::endl;
     camSpeed *= data.getClock()->getDeltaTime();
     data.getCam().processInput(Game::Camera::CameraAction::FORWARD);
     std::cout << "FORWARD" << std::endl;

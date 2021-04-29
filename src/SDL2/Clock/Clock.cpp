@@ -3,23 +3,23 @@
 */
 
 #include "Clock.hpp"
+#include <chrono>
 
 SDL2::Clock::Clock(const std::chrono::_V2::steady_clock::time_point &start)
 {
+    this->__delta = 0.0f;
     this->__lastFrame = 0.0f;
     this->__currentFrame = 0.0f;
     this->__progStart = start;
 }
 
-float SDL2::Clock::getDeltaTime()
+void SDL2::Clock::calulDeltaTime()
 {
-    float delta = 0.0f;
     std::chrono::_V2::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
     
-    this->__currentFrame = std::chrono::duration_cast<std::chrono::seconds>(currentTime - this->__progStart).count();
-    delta = this->__currentFrame - this->__lastFrame;
+    this->__currentFrame = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - this->__progStart).count();
+    this->__delta = this->__currentFrame - this->__lastFrame;
     this->__lastFrame = this->__currentFrame;
-    return (delta);
 }
 
 bool SDL2::Clock::calculTime(const uint32_t &time)

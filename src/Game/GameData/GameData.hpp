@@ -9,6 +9,7 @@
 #include "../../Utils/ParseKeys/ParseKeys.hpp"
 #include "../Camera/Camera.hpp"
 #include "../../SDL2/Clock/Clock.hpp"
+#include "../Transform/Transform.hpp"
 #include <memory>
 
 namespace Game {
@@ -41,12 +42,13 @@ namespace Game {
             }
 
             void updateGame();
-            void render(const Camera &cam);
+            void render();
 
         protected:
         private:
             Utils::ParseKeys __keyRetriever;
             Camera __cam;
+            Transform __transformEngine;
             ObjectBuilder __objectsBuilder;
             std::shared_ptr<SDL2::Clock> __clock;
             std::vector<std::unique_ptr<IGameObject>> __gameObjs;

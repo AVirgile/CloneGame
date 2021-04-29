@@ -42,6 +42,7 @@ namespace Game {
 
             inline float &getCamSpeed()
             {
+                this->__camSpeed = this->__saveSpeed;
                 return (this->__camSpeed);
             }
 
@@ -78,6 +79,7 @@ namespace Game {
             float __aspect;
             float __near;
             float __far;
+            float __saveSpeed;
             float __camSpeed;
     };
 }

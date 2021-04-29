@@ -24,7 +24,8 @@ namespace Game {
                 return (this->__type);
             }
 
-            virtual void renderObj(const Camera &cam) = 0;
+            virtual void updateObj(const Camera &cam, const Transform &trs) = 0;
+            virtual void renderObj() = 0;
         protected:
             std::string __name;
             GameObjectInfo __type;

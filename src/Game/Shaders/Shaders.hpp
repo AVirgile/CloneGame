@@ -5,6 +5,8 @@
 #pragma once
 
 #include "required.hpp"
+#include "../Camera/Camera.hpp"
+#include "../Transform/Transform.hpp"
 
 namespace Game {
     class Shaders {
@@ -12,6 +14,8 @@ namespace Game {
             Shaders() = delete;
             Shaders(const std::string &vertexPath, const std::string &fragmentPath);
             ~Shaders();
+            
+            void updateShader(const Camera &cam, const Transform &trs);
 
             inline ::GLuint getProgramID() const
             {

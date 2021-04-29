@@ -18,7 +18,7 @@ Game::Camera::Camera(const glm::vec3 &pos, const float &fov, const float &aspect
     this->__cameraForward = glm::vec3(0.0f, 0.0f, 1.0f);
     this->__cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
     this->__camSpeed = speed;
-
+    this->__saveSpeed = speed;
 }
 
 glm::mat4 Game::Camera::getViewProjection() const
@@ -28,16 +28,16 @@ glm::mat4 Game::Camera::getViewProjection() const
 
 void Game::Camera::processInput(const CameraAction &action)
 {
-    if (action == CameraAction::LEFT) {
+    if (action == CameraAction::FORWARD) {
         this->__cameraPos += this->__camSpeed * this->__cameraForward;
     }
-    if (action == CameraAction::RIGHT) {
+    if (action == CameraAction::BACKWARD) {
         this->__cameraPos -= this->__camSpeed * this->__cameraForward;
     }
-    if (action == CameraAction::BACKWARD) {
+    if (action == CameraAction::LEFT) {
         this->__cameraPos -= glm::normalize(glm::cross(this->__cameraForward, this->__cameraUp)) * this->__camSpeed;
     }
-    if (action == CameraAction::FORWARD) {
+    if (action == CameraAction::RIGHT) {
         this->__cameraPos += glm::normalize(glm::cross(this->__cameraForward, this->__cameraUp)) * this->__camSpeed;
     }
     if (action == CameraAction::UP) {

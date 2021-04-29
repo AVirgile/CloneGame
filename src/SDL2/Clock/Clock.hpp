@@ -14,7 +14,12 @@ namespace SDL2 {
             ~Clock() = default;
 
             bool calculTime(const uint32_t &time);
-            float getDeltaTime();
+            void calulDeltaTime();
+
+            inline float getDeltaTime() const
+            {
+                return (this->__delta);
+            }
 
             inline const std::chrono::_V2::steady_clock::time_point &getStartTime() const
             {
@@ -25,7 +30,7 @@ namespace SDL2 {
             std::map<uint32_t, uint32_t> __tracker;
             float __lastFrame;
             float __currentFrame;
-
+            float __delta;
             std::chrono::_V2::steady_clock::time_point __progStart;
     };
 }

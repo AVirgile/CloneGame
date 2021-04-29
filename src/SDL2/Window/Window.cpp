@@ -10,6 +10,8 @@
 
 SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &flags, const std::string &name, const std::chrono::_V2::steady_clock::time_point &start)
 {
+    float aspect = 0.0f;
+
     this->__timeManager = std::make_shared<Clock>(start);
     this->__width = width;
     this->__height = height;
@@ -32,7 +34,8 @@ SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &
     this->__running = false;
     glClearColor(0.f, 0.f, 0.f, 0.f);
     glViewport(0, 0, this->__width, this->__height);
-    this->__gameInfo = std::make_unique<Game::GameData>(glm::vec3(0, 0, -3), 70.0f, static_cast<float>(this->__width / this->__height), 0.01f, 1000.0f, 0.05f, this->__timeManager);
+    aspect = static_cast<float>(this->__width) / static_cast<float>(this->__height);
+    this->__gameInfo = std::make_unique<Game::GameData>(glm::vec3(0, 0, -3), 70.0f, aspect, 0.01f, 1000.0f, 0.05f, this->__timeManager);
 }
 
 void SDL2::Window::runWindow()
@@ -58,7 +61,8 @@ void SDL2::Window::__gameLoop()
         try {
             this->__eventsHandler.processEvent(this->__running, *this->__gameInfo);
             this->__gameInfo->updateGame();
-            this->__gameInfo->render(this->__gameInfo->getCam());
+            this->__timeManager->calulDeltaTime();
+            this->__gameInfo->render();
         } catch (const Errors::StopOccured &ex) {
             this->__running = false;
         }

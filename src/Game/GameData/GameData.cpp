@@ -12,13 +12,15 @@ Game::GameData::GameData(const glm::vec3 &pos, const float &fov, const float &as
 
 void Game::GameData::updateGame()
 {
-    // update Game Here
+    for (auto const &val : this->__gameObjs) {
+        val->updateObj(this->__cam, this->__transformEngine);
+    }
 }
 
-void Game::GameData::render(const Camera &cam)
+void Game::GameData::render()
 {
     for (auto const &val : this->__gameObjs) {
-        val->renderObj(cam);
+        val->renderObj();
     }
 }
 
