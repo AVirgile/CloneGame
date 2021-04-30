@@ -19,7 +19,6 @@ void SDL2::Events::processEvent(bool &running, Game::GameData &data)
         this->__frameEvts.push_back(event);      
     }
     for (SDL_Event const &val : this->__frameEvts) {
-        std::cout << val.type << std::endl;
         if (val.type == SDL_QUIT) {
             running = false;
         } else {
