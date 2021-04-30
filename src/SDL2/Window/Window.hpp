@@ -12,7 +12,7 @@
 namespace SDL2 {
     class Window {
         public:
-            Window(const size_t &width, const size_t &height, const uint32_t &flags, const std::string &name);
+            Window(const size_t &width, const size_t &height, const uint32_t &flags, const std::string &name, const std::chrono::_V2::steady_clock::time_point &start);
             ~Window();
 
             void runWindow();

@@ -10,6 +10,7 @@
 namespace Game {
     class GameObject : public IGameObject {
         public:
+            GameObject() = delete;
             GameObject(const std::string &name, const GameObjectInfo &type);
             ~GameObject();
 
@@ -23,10 +24,12 @@ namespace Game {
                 return (this->__type);
             }
 
+            virtual void updateObj(const Camera &cam, const Transform &trs) = 0;
             virtual void renderObj() = 0;
         protected:
-        private:
             std::string __name;
             GameObjectInfo __type;
+            ::GLuint __bufferId;
+        private:
     };
 }
