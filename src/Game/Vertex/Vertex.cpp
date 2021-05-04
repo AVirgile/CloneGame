@@ -3,9 +3,6 @@
 */
 
 #include "Vertex.hpp"
-#include <SDL2/SDL_opengl.h>
-#include <ios>
-#include <memory>
 
 Game::Vertex::Vertex(const vertexData_t *arr, const ::GLuint *indices, const size_t &dataSize, const size_t &arrSize, const size_t &indicesSize)
 {
