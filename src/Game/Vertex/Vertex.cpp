@@ -13,7 +13,9 @@ Game::Vertex::Vertex(const vertexData_t *arr, const ::GLuint *indices, const siz
     this->__indices = std::make_unique<::GLuint[]>(this->__indicesSize);
     this->__copyArray<vertexData_t>(&(*this->__data.get()), arr, this->__dataArrSize);
     this->__copyArray<::GLuint>(&(*this->__indices.get()), indices, this->__indicesSize);
-
+    for (size_t i = 0; i < this->__dataArrSize; i++) {
+        std::cout << this->__data[i].x << std::endl;
+    }
 }
 
 Game::Vertex &Game::Vertex::operator=(const Vertex &mod)
@@ -41,7 +43,9 @@ Game::Vertex::Vertex(const Vertex &mod)
 
 size_t Game::Vertex::getSpecificDataSize(const specificDataSize &data) const
 {
-    (void)data;
+    if (data == specificDataSize::POSITION) {
+        return (sizeof(float) * 3);
+    }
     return (0);
 }
 
