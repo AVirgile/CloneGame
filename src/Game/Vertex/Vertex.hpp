@@ -58,6 +58,11 @@ namespace Game {
             {
                 return (this->__dataArrSize);
             }
+       
+            inline size_t getPoints() const
+            {
+                return (this->__dataSize);
+            }
         protected:
         private:
 

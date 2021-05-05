@@ -50,7 +50,7 @@ void Game::Blocks::renderObj()
         return;
     }
     ::glBindBuffer(GL_ARRAY_BUFFER, this->__ibo);
-    ::glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+    ::glDrawElements(GL_TRIANGLES, this->__vertex->getPoints(), GL_UNSIGNED_INT, nullptr);
     ::glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
