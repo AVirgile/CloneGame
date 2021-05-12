@@ -19,6 +19,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <array>
 #include "glm/glm/glm.hpp"
 #include "glm/glm/gtx/transform.hpp"
 
