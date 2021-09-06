@@ -4,10 +4,18 @@
 
 #include "Builder.hpp"
 #include "../../../../Errors/ErrorsSDL2/ErrorsSDL2.hpp"
+#include <SDL2/SDL_events.h>
+#include <memory>
 
 SDL2::Builder::Builder()
 {
     this->_fctMap[SDL_KEYDOWN] = &Builder::__createKeyDown;
+    this->_fctMap[::SDL_MOUSEMOTION] = &Builder::__createMouseMotion;
+}
+
+std::unique_ptr<SDL2::ITypes> SDL2::Builder::__createMouseMotion() const noexcept
+{
+    return (std::make_unique<MouseMotion>());
 }
 
 std::unique_ptr<SDL2::ITypes> SDL2::Builder::__createKeyDown() const noexcept

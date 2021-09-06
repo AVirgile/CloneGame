@@ -4,10 +4,17 @@
 
 #include "Window.hpp"
 #include "../../Errors/ErrorsSDL2/ErrorsSDL2.hpp"
+#include "../../Errors/ErrorsGameEngine/ErrorsGameEngine.hpp"
+#include "glm/glm/fwd.hpp"
+#include "../../Errors/StopOccured/StopOccured.hpp"
+#include <SDL2/SDL_mouse.h>
+#include <SDL2/SDL_video.h>
 
-SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &flags, const std::string &name)
+SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &flags, const std::string &name, const std::chrono::_V2::steady_clock::time_point &start)
 {
-    this->__timeManager = std::make_shared<Clock>();
+    float aspect = 0.0f;
+
+    this->__timeManager = std::make_shared<Clock>(start);
     this->__width = width;
     this->__height = height;
     this->__flags = flags;
@@ -25,11 +32,18 @@ SDL2::Window::Window(const size_t &width, const size_t &height, const uint32_t &
     }
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+    //::SDL_ShowCursor(SDL_DISABLE);
+    ::SDL_SetWindowGrab(this->__window, SDL_TRUE);
+    ::SDL_SetRelativeMouseMode(SDL_TRUE);
     this->__context = SDL_GL_CreateContext(this->__window);
     this->__running = false;
-    glClearColor(1.f, 0.f, 1.f, 0.f);
+    glClearColor(0.f, 0.f, 0.f, 0.f);
     glViewport(0, 0, this->__width, this->__height);
-    this->__gameInfo = std::make_unique<Game::GameData>();
+    aspect = static_cast<float>(this->__width) / static_cast<float>(this->__height);
+    this->__gameInfo = std::make_unique<Game::GameData>(glm::vec3(0, 0, -3), 70.0f, aspect, 0.01f, 1000.0f, 0.05f, this->__timeManager);
+    glm::vec2 &mousePosInit = this->__gameInfo->getCam().getLastMousePos();
+    mousePosInit.x = this->__width / 2.0f;
+    mousePosInit.y = this->__height / 2.0f;
 }
 
 void SDL2::Window::runWindow()
@@ -51,10 +65,15 @@ void SDL2::Window::__gameLoop()
         // if (this->__timeManager->calculTime(1000)) {
         //     std::cout << "one second" << std::endl;
         // }
-        this->__eventsHandler.processEvent(this->__running, *this->__gameInfo);
-        this->__gameInfo->updateGame();
-        this->__gameInfo->render();
         glClear(GL_COLOR_BUFFER_BIT);
+        try {
+            this->__eventsHandler.processEvent(this->__running, *this->__gameInfo);
+            this->__gameInfo->updateGame();
+            this->__timeManager->calulDeltaTime();
+            this->__gameInfo->render();
+        } catch (const Errors::StopOccured &ex) {
+            this->__running = false;
+        }
         SDL_GL_SwapWindow(this->__window);
     }
 }
